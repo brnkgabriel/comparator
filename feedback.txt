@@ -1,0 +1,3 @@
+Product Comparator Next steps
+- change the color of the compare button
+- change banner of the landing page

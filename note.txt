@@ -1,0 +1,3 @@
+https://github.com/iamshaunjp/webpack-and-typescript
+
+todo: use sku finder logic to get products from catalog page
