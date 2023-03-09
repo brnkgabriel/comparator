@@ -1,1 +1,39 @@
-<div class="-head"><div class="-search-form -posrel"><button class="-switcher -cta"><img src="https://ng.jumia.is/cms/0-1-initiatives/product-comparator/2023/flip-icon.png" alt="flip icon" /></button><input type="text" class="-search-input" placeholder="Search for products" /><div class="-cta -search-btn -posabs"><div class="-search-btn-clickable -posabs" data-type="search-btn"></div><div class="search-icon"></div>${this.spinLoader()} </div></div><div class="-title"><div class="-title-name">${category.plural_name}</div><div class="-title-desc">${this.formatPrice(category.price_point)}</div></div></div>
+<button id="compare">compare</button>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNGLK2N3DF"></script>
+<script>
+  const time = 1000
+  setTimeout(() => {
+    if (/loaded|complete/.test(document.readyState)) {
+      console.log(`to begin after ${time / 1000}s timeout`)
+      begin()
+    }
+  }, time);
+
+  function begin() {
+    let scripts = document.querySelectorAll("script")
+    let noscripts = document.querySelectorAll("noscript")
+    let scribeshadows = document.querySelectorAll("scribe-shadow")
+    let iframes = document.querySelectorAll("iframe")
+    scripts.forEach(script => script.parentElement.removeChild(script))
+    noscripts.forEach(noscript => noscript.parentElement.removeChild(noscript))
+    scribeshadows.forEach(scribeshadow => scribeshadow.parentElement.removeChild(scribeshadow))
+    iframes.forEach(iframe => iframe.parentElement.removeChild(iframe))
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GNGLK2N3DF');
+
+    const compareBtn = document.querySelector('#compare')
+    compareBtn.addEventListener("click", () => {
+      console.log("clicking compare btn")
+      gtag('event', 'compare_button_filter', {
+        'event_category': "button click",
+        'event_label': "compare btn",
+        'value': 1
+      });
+    });
+  }
+</script>

@@ -22,8 +22,9 @@ export class Controller extends Util {
   private selection: HTMLElement
   private searchInput: HTMLInputElement
   private api: Api
+  private gtag: any
 
-  constructor(remoteData: iRemoteData, fbox: any) {
+  constructor(remoteData: iRemoteData, fbox: any, gtag: any) {
     super(remoteData, fbox)
 
     this.api = new Api(remoteData, fbox)
@@ -32,6 +33,7 @@ export class Controller extends Util {
     this.productMap = []
     this.filters = []
     this.categoryMap = undefined
+    this.gtag = gtag
 
     this.tandcsEl = this.el(constants.TANDCSQUERY)
     this.hiwCTA = this.el(constants.HOWITWORKSQUERY)
@@ -67,6 +69,11 @@ export class Controller extends Util {
     this.controls = this.all(constants.CONTROL)
 
     this.switchBtn.addEventListener('click', () => {
+      this.gtag('event', 'switch', {
+        'event_category': "button",
+        'event_label': "switch button",
+        'value': 1
+      });
       this.flipElements(constants.TOGGLE)
       this.positionAndUpdateAfterFlip()
     })
@@ -123,13 +130,11 @@ export class Controller extends Util {
         this.categoryBtnUpdate(target)
         break;
       case constants.DIRBTN:
-        const direction = target.getAttribute("data-dir")
-        const productfloor = target.parentElement
-        const scrollable = this.el(".-product-scrollable", productfloor as HTMLElement).parentElement 
-        direction === constants.NEXT
-          ? this.scrollTonext(scrollable as HTMLElement)
-          : this.scrollToprev(scrollable as HTMLElement)
+        this.handleDirection(target)
         break;
+      case constants.ATC:
+        this.handleAddToCart(target)
+        break
       case constants.COMPARE:
         this.updateSelection(target)
         break;
@@ -145,17 +150,51 @@ export class Controller extends Util {
 
   }
 
+  handleAddToCart(target:HTMLElement) {
+    const sku = target.getAttribute("data-sku") 
+    this.gtag('event', 'add_to_cart', {
+      'event_category': "outflow to pdp",
+      'event_label': sku,
+      'event_title': sku,
+      'value': sku
+    });
+  }
+
+  handleDirection(target: HTMLElement) {
+    const direction = target.getAttribute("data-dir")
+    const productfloor = target.parentElement
+    const scrollable = this.el(".-product-scrollable", productfloor as HTMLElement).parentElement 
+    direction === constants.NEXT
+      ? this.scrollTonext(scrollable as HTMLElement)
+      : this.scrollToprev(scrollable as HTMLElement)
+      this.gtag('event', 'direction', {
+        'event_category': "button click",
+        'event_label': direction,
+        'value': 1
+      });
+  }
+
   categoryBtnUpdate(target: HTMLElement) {
     this.searchInput.value = ""
     const category = target.getAttribute("data-category")
     this.updateProductFloor(category as string)
     this.flipElements(constants.REMOVE)
+    this.gtag('event', 'category', {
+      'event_category': "button click",
+      'event_label': category,
+      'value': 1
+    });
   }
 
   btnFilterUpdate(target: HTMLElement) {
     const propName = target.getAttribute("data-name")
     const btn = target.parentElement
     btn?.classList.toggle("active")
+    this.gtag('event', 'product_filter', {
+      'event_category': propName,
+      'event_label': propName,
+      'value': 1
+    });
 
     if (btn?.classList.contains("active")) {
       this.filters.unshift(propName as string)
@@ -172,6 +211,12 @@ export class Controller extends Util {
   searchBtnFilterUpdate(target: HTMLElement) {
     const parent = target.parentElement
     const searchValue = this.searchInput.value
+    
+    this.gtag('event', 'search', {
+      'event_category': "product",
+      'event_label': searchValue,
+      'value': 1
+    });
     if (searchValue.length > 0) {
       this.updateFilters(searchValue)
       const catObj: iCategory = {
@@ -210,6 +255,14 @@ export class Controller extends Util {
     this.updateFilters(selection.singularName as string)
     this.updateSelectionUi(selection)
     this.flipAndPopulateSimilarProducts(selection)
+    
+    this.gtag('event', 'compare', {
+      'event_category': "SKU",
+      'event_label': selection.singularName,
+      'event_displayName': selection.displayName,
+      'value': selection.sku
+    });
+ 
   }
 
   updateFilters(name: string) {
@@ -361,7 +414,7 @@ export class Controller extends Util {
 
     const discount = sku.prices.oldPrice ? this.discountHtml(sku) : ""
 
-    return `<div class="-sku -posrel -available" data-sku="${sku.sku}"><a href="${sku.url}" target="_blank" class="-img -posrel"><span class="-posabs -preloader -hide"></span><img class="lazy-image loaded" data-src="${sku.image}" alt="sku_img" /></a><div class="-details"><div class="-name">${sku.displayName}</div><div class="-features">${express} ${officialStore} ${rating} </div><div class="-prices"><div class="-price -new">${sku.prices.price}</div>${discount} </div></div><a href="${sku.url}" target="_blank" class="-cta -buy -posabs">buy</a></div>`
+    return `<div class="-sku -posrel -available" data-sku="${sku.sku}"><a href="${sku.url}" target="_blank" class="-img -posrel"><span class="-posabs -preloader -hide"></span><img class="lazy-image loaded" data-src="${sku.image}" alt="sku_img" /></a><div class="-details"><div class="-name">${sku.displayName}</div><div class="-features">${express} ${officialStore} ${rating} </div><div class="-prices"><div class="-price -new">${sku.prices.price}</div>${discount} </div></div><a href="${sku.url}" target="_blank" class="-cta -buy -posabs" data-type="atc" data-sku="${sku.sku}">buy</a></div>`
   }
 
   skuHtml(skuObj: iSKU, category: iCategory) {
@@ -373,7 +426,7 @@ export class Controller extends Util {
     const discountHtml = discount ? `<div class="-discount">${discount}</div>` : ""
 
     return `
-    <div data-sku="${sku}" class="-posrel -sku"><a href="${url}" class="-img -posrel"><span class="-posabs -preloader -loading"></span><img class="lazy-image" data-src="${image}" alt="${displayName}" /></a><div class="-details"><div class="-name">${displayName}</div><div class="-prices"><div class="-new -price">${price}</div>${discountHtml} </div><div class="-atc-compare"><a href="${url}" class="-cta -atc">Add to cart</a><a href="#initiative" class="-cta -compare" data-sku="${sku}" data-singular-name="${category.singular_name}" data-plural-name="${category.plural_name}" data-type="compare">Compare</a></div></div></div>
+    <div data-sku="${sku}" class="-posrel -sku"><a href="${url}" class="-img -posrel"><span class="-posabs -preloader -loading"></span><img class="lazy-image" data-src="${image}" alt="${displayName}" /></a><div class="-details"><div class="-name">${displayName}</div><div class="-prices"><div class="-new -price">${price}</div>${discountHtml} </div><div class="-atc-compare"><a href="${url}" target="_blank" class="-cta -atc" data-type="atc" data-sku="${sku}">Add to cart</a><a href="#initiative" class="-cta -compare" data-sku="${sku}" data-singular-name="${category.singular_name}" data-plural-name="${category.plural_name}" data-type="compare">Compare</a></div></div></div>
     `
   }
   updateProductFloor(category: string) {

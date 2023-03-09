@@ -52,6 +52,7 @@ export const constants = {
   TABCLASS: "-tab",
   CATTYPE: "category",
   DIRBTN: "dir-btn",
+  ATC: "atc",
   COMPARE: "compare",
   SELECTIONBTN: "selection-btn",
   SEARCHBTN: "search-btn",
