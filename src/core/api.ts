@@ -38,6 +38,7 @@ export class Api extends Util{
   escape(str: string) {
     return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
   }
+  
   async products(url: string) {
     let skus: any[] = []
     try {
@@ -49,7 +50,6 @@ export class Api extends Util{
       // const endIdx = closingBraces[closingBraces.length - 1]
       // const products = productsStr.substring(0, endIdx + 2) + '}'
       const products = this.isMobile ? this.mobile(text) : this.desktop(text)
-      localStorage.setItem("apiProducts", products)
       const parsed = JSON.parse(products).products
       skus = parsed
       this.toast.setMessage({

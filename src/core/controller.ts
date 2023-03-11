@@ -152,17 +152,17 @@ export class Controller extends Util {
     const product = this.productMap?.find((product: iSKU) => product.sku === sku) 
     gtag('event', 'outflow_to_pdp', { 
       'event_label': sku,
-      'event_product_name': product?.displayName,
-      'event_product_url': product?.url,
-      'event_product_category_tree': product?.categories,
-      'event_product_brand': product?.brand,
-      'event_product_image': product?.image,
-      'event_product_seller_id': product?.sellerId,
-      'event_product_price': product?.prices.price,
-      'event_product_is_jumia_express': product?.isShopExpress,
-      'event_product_average_rating': product?.rating?.average,
-      'event_product_total_rating': product?.rating?.totalRatings,
-      'event_product_is_buyable': product?.isBuyable,
+      'product_name': product?.displayName,
+      'product_url': product?.url,
+      'product_category_tree': product?.categories,
+      'product_brand': product?.brand,
+      'product_image': product?.image,
+      'product_seller_id': product?.sellerId,
+      'product_price': product?.prices.price,
+      'product_is_jumia_express': product?.isShopExpress,
+      'product_average_rating': product?.rating?.average,
+      'product_total_rating': product?.rating?.totalRatings,
+      'product_is_buyable': product?.isBuyable,
       'event_title': sku,
       'value': sku
     });
@@ -196,7 +196,7 @@ export class Controller extends Util {
     const propName = target.getAttribute("data-name")
     const btn = target.parentElement
     btn?.classList.toggle("active")
-    gtag('event', 'event_product_filter', { 
+    gtag('event', 'product_filter', { 
       'event_label': propName,
       'value': 1
     });
@@ -262,17 +262,17 @@ export class Controller extends Util {
     
     gtag('event', 'compare', {      
       'event_label': selection.sku,
-      'event_product_name': selection?.displayName,
-      'event_product_url': selection?.url,
-      'event_product_category_tree': selection?.categories,
-      'event_product_brand': selection?.brand,
-      'event_product_image': selection?.image,
-      'event_product_seller_id': selection?.sellerId,
-      'event_product_price': selection?.prices.price,
-      'event_product_is_jumia_express': selection?.isShopExpress,
-      'event_product_average_rating': selection?.rating?.average,
-      'event_product_total_rating': selection?.rating?.totalRatings,
-      'event_product_is_buyable': selection?.isBuyable,
+      'product_name': selection?.displayName,
+      'product_url': selection?.url,
+      'product_category_tree': selection?.categories,
+      'product_brand': selection?.brand,
+      'product_image': selection?.image,
+      'product_seller_id': selection?.sellerId,
+      'product_price': selection?.prices.price,
+      'product_is_jumia_express': selection?.isShopExpress,
+      'product_average_rating': selection?.rating?.average,
+      'product_total_rating': selection?.rating?.totalRatings,
+      'product_is_buyable': selection?.isBuyable,
       'event_title': selection.sku,
       'value': selection.sku
     });
