@@ -128,3 +128,8 @@ export interface iProductFloorOptions {
   name: string,
   desc: string
 }
+
+export interface iToast {
+  type: string;
+  message: string;
+}

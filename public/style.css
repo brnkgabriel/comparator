@@ -17,12 +17,19 @@
 :root {
   --bg-color: #f5f5f5;
   --font-color: #282828;
-  --light-blue: #C3DEF0;
-  --dark-blue: #0040CEaa;
+  --campaign: #e1dae6;
+  --campaign-dark: #38153Caa;
   --barred-price: #75757a;
   --jumia-cta: #f68b1e;
   --discount-bg: #feefde;
   --tabs-bg: #fdfdfd;
+  --green: #137333;
+  --green-bg: #e6f4ea;
+  --orange: #f68b1e;
+  --orange-bg: #fde7db;
+  --red: #a50e0e;
+  --red-bg: #fce8e6;
+  --blue-bg: #D3E5FF;
 }
 
 body {
@@ -86,7 +93,7 @@ body {
 }
 
 .-superblock>.-title {
-  background-color: var(--light-blue);
+  background-color: var(--campaign);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,7 +107,7 @@ body {
 .-superblock .-switcher {
   border: unset;
   margin-left: unset;
-  background-color: var(--dark-blue);
+  background-color: var(--campaign-dark);
   text-transform: capitalize;
   padding: unset;
   width: 40px !important;
@@ -140,7 +147,7 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
-}
+} 
 
 #initiative .-banner .-how-it-works {
   background-color: var(--font-color);
@@ -336,7 +343,7 @@ body {
 
 .-selection .-back {
   overflow: hidden;
-  background-color: var(--light-blue);
+  background-color: var(--campaign);
 }
 
 .-back .-sku {
@@ -449,7 +456,7 @@ body {
   transform: translate(-50%, -50%) rotate(0deg);
   width: 16px;
   height: 16px;
-  border: 2px solid var(--dark-blue);
+  border: 2px solid var(--campaign-dark);
   border-radius: 50%;
   border-top-color: transparent;
   border-bottom-color: transparent;
@@ -481,7 +488,7 @@ body {
   font-size: 0.8em;
   transform: scale(1);
   cursor: pointer;
-  background-color: var(--light-blue);
+  background-color: var(--campaign);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -529,7 +536,7 @@ body {
   height: 100%;
   width: 90%;
   transform: translate(-50%, -50%) skewX(-10deg);
-  background-color: var(--dark-blue);
+  background-color: var(--campaign-dark);
 }
 
 .-cat .-price-point {
@@ -564,7 +571,7 @@ body {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   box-shadow: unset;
-  background-color: var(--light-blue);
+  background-color: var(--campaign);
 }
 
 .-superblock .-productfloor .-head .-title {
@@ -590,7 +597,7 @@ body {
   top: 0;
   width: 40px !important;
   height: 40px !important;
-  background-color: var(--dark-blue);
+  background-color: var(--campaign-dark);
   border-top-left-radius: unset;
   border-bottom-left-radius: unset;
   border-top-right-radius: 8px;
@@ -825,12 +832,12 @@ body {
   justify-content: center;
   column-gap: 4px;
   align-items: center;
-  background-color: var(--light-blue);
-  color: var(--dark-blue);
+  background-color: var(--campaign);
+  color: var(--campaign-dark);
 }
 
 .-sku .-details .-btn.active {
-  background-color: var(--dark-blue);
+  background-color: var(--campaign-dark);
   color: white;
 }
 
@@ -868,7 +875,7 @@ body {
 }
 
 .-compare {
-  background-color: var(--dark-blue);
+  background-color: var(--campaign-dark);
 }
 
 /* rules & eligibility */
@@ -934,4 +941,83 @@ body {
 .-rules_eligibility .-re .-desc {
   width: 90%;
   letter-spacing: 0.5px;
+}
+
+
+/* Toast */
+
+.-toast {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  width: calc(100% - 16px);
+  margin: 0 8px;
+  border-radius: 4px;
+  top: 0;
+  left: 0;
+  z-index: 110;
+}
+/* 
+.error.-toast {
+  background-color: var(--red-bg);
+}
+
+.success.-toast {
+  background-color: var(--green-bg);
+} */
+
+
+.error.-toast {
+  background-color: var(--red);
+}
+
+.success.-toast {
+  background-color: var(--green);
+}
+
+.error.-toast .-message,
+.success.-toast .-message  {
+  color: white;
+}
+
+.-toast .-message {
+  font-weight: 600;
+}
+
+
+.-toast .-close {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  transform: scale(1);
+}
+
+.-toast .-close:active {
+  transform: scale(.95);
+}
+
+.-toast .-close::before,
+.-toast .-close::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background-color: var(--font-color);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+
+.-toast .-close::before {
+
+}
+
+.-toast .-close::after {
+  transform: translate(-50%,-50%) rotate(-45deg);
 }

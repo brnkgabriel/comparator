@@ -1,39 +1,25 @@
-<button id="compare">compare</button>
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNGLK2N3DF"></script>
 <script>
-  const time = 1000
-  setTimeout(() => {
-    if (/loaded|complete/.test(document.readyState)) {
-      console.log(`to begin after ${time / 1000}s timeout`)
-      begin()
+  class Toast extends Util{
+    constructor(config) { 
+      super(config)
+      this.toast = this.el(".-toast")
+      this.toastMessage = this.el(".-toast .-message")
+      this.toastCloseBtn = this.el(".-toast .-close")
+      
+      this.initialize()
     }
-  }, time);
 
-  function begin() {
-    let scripts = document.querySelectorAll("script")
-    let noscripts = document.querySelectorAll("noscript")
-    let scribeshadows = document.querySelectorAll("scribe-shadow")
-    let iframes = document.querySelectorAll("iframe")
-    scripts.forEach(script => script.parentElement.removeChild(script))
-    noscripts.forEach(noscript => noscript.parentElement.removeChild(noscript))
-    scribeshadows.forEach(scribeshadow => scribeshadow.parentElement.removeChild(scribeshadow))
-    iframes.forEach(iframe => iframe.parentElement.removeChild(iframe))
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-GNGLK2N3DF');
-
-    const compareBtn = document.querySelector('#compare')
-    compareBtn.addEventListener("click", () => {
-      console.log("clicking compare btn")
-      gtag('event', 'compare_button_filter', {
-        'event_category': "button click",
-        'event_label': "compare btn",
-        'value': 1
-      });
-    });
+    initialize() {
+      this.toastCloseBtn.addEventListener("click", () => this.toast.classList.toggle("-hide"))
+    }
+    
+    setMessage({ type, message }) {
+      this.toast.classList.add(type)
+      this.toastMessage.textContent = message
+      this.toast.classList.remove("-hide")
+      if (type === this.TYPES.success) {
+        setTimeout(() => this.toast.classList.add("-hide"), 5000);
+      }
+    }
   }
 </script>

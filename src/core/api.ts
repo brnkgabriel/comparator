@@ -1,9 +1,13 @@
+import { Toast } from "./toast";
 import { iRemoteData } from "./types/index";
 import { Util } from "./util";
 
 export class Api extends Util{
+
+  private toast: Toast
   constructor(remoteData: iRemoteData, fbox: any) {
     super(remoteData, fbox)
+    this.toast = new Toast(remoteData, fbox)
   }
 
   
@@ -35,21 +39,29 @@ export class Api extends Util{
     return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
   }
   async products(url: string) {
-    const response = await fetch(url)
-    const text = await response.text()
-    // const startIdx = text.indexOf('"products":[{')
-    // const productsStr = '{' + text.substring(startIdx, text.length)
-    // const closingBraces = this.braceIndices(productsStr, this.escapeStr("}]"))
-    // const endIdx = closingBraces[closingBraces.length - 1]
-    // const products = productsStr.substring(0, endIdx + 2) + '}'
-    const products = this.isMobile ? this.mobile(text) : this.desktop(text)
     let skus: any[] = []
     try {
+      const response = await fetch(url)
+      const text = await response.text()
+      // const startIdx = text.indexOf('"products":[{')
+      // const productsStr = '{' + text.substring(startIdx, text.length)
+      // const closingBraces = this.braceIndices(productsStr, this.escapeStr("}]"))
+      // const endIdx = closingBraces[closingBraces.length - 1]
+      // const products = productsStr.substring(0, endIdx + 2) + '}'
+      const products = this.isMobile ? this.mobile(text) : this.desktop(text)
       localStorage.setItem("apiProducts", products)
       const parsed = JSON.parse(products).products
       skus = parsed
-    } catch (error) {
+      this.toast.setMessage({
+        type: "success",
+        message: `successfully fetched ${skus.length} products`
+      })
+    } catch (error: any) {
       console.info(error)
+      this.toast.setMessage({
+        type: "error",
+        message: error.message
+      })
       skus = []
     }
     return skus

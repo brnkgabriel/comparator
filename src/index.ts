@@ -1,26 +1,11 @@
 import { config, constants, gfConfig } from "./core/constants";
 import { Controller } from "./core/controller"; 
 import { iRemoteData } from "./core/types/index";
-import { Util } from "./core/util";
-import Analytics from "analytics"
-// @ts-ignore
-import googleAnalytics from "@analytics/google-analytics"
-
+import { Util } from "./core/util"; 
 
 start()
 
 function start() {
-
-  const analytics = Analytics({
-    app: 'awesome-app',
-    plugins: [
-      googleAnalytics({
-        measurementIds: ['G-GNGLK2N3DF']
-      })
-    ]
-  })
-
-  console.log("analytics is", analytics)
 
   const wind = window as any
 
@@ -61,7 +46,7 @@ function start() {
           break;
       }
     })
-    new Controller(remoteData, fbox, gtag)
+    new Controller(remoteData, fbox)
   })
   
 }

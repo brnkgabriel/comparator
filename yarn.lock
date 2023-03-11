@@ -5,80 +5,6 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@analytics/cookie-utils@npm:^0.2.10":
-  version: 0.2.10
-  resolution: "@analytics/cookie-utils@npm:0.2.10"
-  dependencies:
-    "@analytics/global-storage-utils": ^0.1.5
-  checksum: 126302a555efe2fc9d1a04d18f822283ddb11285c3632842a4247e8d25fa79b806db4d934e20c26ab925b75dfbe6402acf51f9966c0a14979552142d9973c7ea
-  languageName: node
-  linkType: hard
-
-"@analytics/core@npm:^0.11.1":
-  version: 0.11.1
-  resolution: "@analytics/core@npm:0.11.1"
-  dependencies:
-    "@analytics/global-storage-utils": ^0.1.5
-    "@analytics/type-utils": ^0.6.0
-    analytics-utils: ^1.0.10
-  checksum: 446f79f24acff7393c114ee232d23da31271ceb168c1159f3b10f3c7d6a795b91568c46d236f9e6aea10dbbab84ec6d61978bc68ade66f1ad4f904c0ef9d421d
-  languageName: node
-  linkType: hard
-
-"@analytics/global-storage-utils@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@analytics/global-storage-utils@npm:0.1.5"
-  dependencies:
-    "@analytics/type-utils": ^0.6.0
-  checksum: 7098aaecb5bbd9e5401fc6087771ef78d32f4e406d7f455bb82dd1db6893b82758d5c2dda26f2027c35955b7698f85558c7940be32af34aa4a32e2bf53ddc747
-  languageName: node
-  linkType: hard
-
-"@analytics/google-analytics@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@analytics/google-analytics@npm:1.0.5"
-  checksum: fb45944da75114e13f8bdace3cc877ef47b63670175f66907f0fff675c519a96baaecac93ab700a007cddffd7df2e0a34a23c146dd456886fceae8c58f9cbd1a
-  languageName: node
-  linkType: hard
-
-"@analytics/localstorage-utils@npm:^0.1.8":
-  version: 0.1.8
-  resolution: "@analytics/localstorage-utils@npm:0.1.8"
-  dependencies:
-    "@analytics/global-storage-utils": ^0.1.5
-  checksum: 7afcd029d93f35e8544b694502988a85a5fc1a693f39cbb53166ce379fc1ddf77b75c3eb3c81a8fa91b5e5ea969dec80bd7fee1b9c13eb100c971cc855ea381d
-  languageName: node
-  linkType: hard
-
-"@analytics/session-storage-utils@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "@analytics/session-storage-utils@npm:0.0.5"
-  dependencies:
-    "@analytics/global-storage-utils": ^0.1.5
-  checksum: 578a88df2d58e71573633a04636c0c7770e887b209b4a603edad55a1575c6c2b7d63bc82cc258b2bc2aeffd7b1b565d18308cc717d8320ccc77fc7dda40c15f1
-  languageName: node
-  linkType: hard
-
-"@analytics/storage-utils@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@analytics/storage-utils@npm:0.4.0"
-  dependencies:
-    "@analytics/cookie-utils": ^0.2.10
-    "@analytics/global-storage-utils": ^0.1.5
-    "@analytics/localstorage-utils": ^0.1.8
-    "@analytics/session-storage-utils": ^0.0.5
-    "@analytics/type-utils": ^0.6.0
-  checksum: 966c90628d7aca96ec32a188ab292726bfa533eafed60caa46f569f0b8ba53bbf5a0bf409491ae1ee3b173adcc671d1c81b8759e3f3bf37434b2646f8db400ee
-  languageName: node
-  linkType: hard
-
-"@analytics/type-utils@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "@analytics/type-utils@npm:0.6.0"
-  checksum: af460a1b2f330f10b48177a245fbee08cabf1cca98064df0ade14249e3aa85c55e3183239de80903f7cc4623b571b8b0679914b6eaee1ce37820814de3147028
-  languageName: node
-  linkType: hard
-
 "@discoveryjs/json-ext@npm:^0.5.0":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -690,28 +616,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"analytics-utils@npm:^1.0.10":
-  version: 1.0.10
-  resolution: "analytics-utils@npm:1.0.10"
-  dependencies:
-    "@analytics/type-utils": ^0.6.0
-    dlv: ^1.1.3
-  peerDependencies:
-    "@types/dlv": ^1.0.0
-  checksum: bf68d29174420012fe6dc8cf63c19119638d4c9e755cfe6ba10412b826804c6da9dad3d0809eb180bb01964f4dc0a34b8da61f7087ec0c028f103179b16b7711
-  languageName: node
-  linkType: hard
-
-"analytics@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "analytics@npm:0.8.1"
-  dependencies:
-    "@analytics/core": ^0.11.1
-    "@analytics/storage-utils": ^0.4.0
-  checksum: f609a74b5fcec93e0b4393185be7dbc316fd3fc9b6b7bcfbc70538bf7a37de7854f3853f657a46b4c8798c39f7154d19241fadc5019e97f0c7f8cc73d59ee15c
-  languageName: node
-  linkType: hard
-
 "ansi-html-community@npm:^0.0.8":
   version: 0.0.8
   resolution: "ansi-html-community@npm:0.0.8"
@@ -1206,13 +1110,6 @@ __metadata:
   version: 2.1.0
   resolution: "detect-node@npm:2.1.0"
   checksum: 832184ec458353e41533ac9c622f16c19f7c02d8b10c303dfd3a756f56be93e903616c0bb2d4226183c9351c15fc0b3dba41a17a2308262afabcfa3776e6ae6e
-  languageName: node
-  linkType: hard
-
-"dlv@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "dlv@npm:1.1.3"
-  checksum: d7381bca22ed11933a1ccf376db7a94bee2c57aa61e490f680124fa2d1cd27e94eba641d9f45be57caab4f9a6579de0983466f620a2cd6230d7ec93312105ae7
   languageName: node
   linkType: hard
 
@@ -3543,9 +3440,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "webpack-typescript@workspace:."
   dependencies:
-    "@analytics/google-analytics": ^1.0.5
     "@types/gtag.js": ^0.0.12
-    analytics: ^0.8.1
     ts-loader: ^9.4.1
     typescript: ^4.8.3
     webpack: ^5.74.0
